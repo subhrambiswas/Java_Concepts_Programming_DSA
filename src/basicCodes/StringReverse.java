@@ -2,7 +2,7 @@ package basicCodes;
 
 public class StringReverse {
     public static void main(String args[]) {
-        String name = "Subhram";
+        String name = "Subhram Biswas";
         char ch;
         String revname = "";
         int len = name.length();
