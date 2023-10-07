@@ -38,9 +38,15 @@ public class Java8Features {
         subjectScore.put("Biology", 85);
         subjectScore.put("English", 75);
 
-        Map<Integer, Long> scoreRepetition = marks.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        System.out.println(scoreRepetition);
-//
+//        Map<Integer, Long> scoreRepetition = marks.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+//        System.out.println(scoreRepetition);
+
+//      Find the number of vowels present in the subject name
+        Map<String, Integer> result = subject.stream()
+                .collect(Collectors.toMap(Function.identity(), cname -> cname.toLowerCase().replaceAll("[^aeiou]","").length()));
+
+        System.out.println(result);
+
 //        List<Integer> above90 = marks.stream().filter(p -> p > 90).collect(Collectors.toList());
 //        System.out.println(above90);
 
@@ -90,6 +96,14 @@ public class Java8Features {
 
 //            arr.stream().sorted(Comparator.reverseOrder()).forEach(System.out :: println);
 
+
+//          Reverse words in a string
+
+//        String str = "quick brown fox jumps over lazy dog";
+//        String reverseStr = Arrays
+//                .stream(str.split(" "))
+//                .map(word -> new StringBuilder(word).reverse())
+//                .collect(Collectors.joining(" "));
 
             }
         }
