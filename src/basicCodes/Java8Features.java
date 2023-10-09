@@ -1,10 +1,14 @@
 package basicCodes;
 
 import javax.swing.plaf.synth.SynthTextAreaUI;
+import java.net.CookieHandler;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 
 public class Java8Features {
     public static void main(String args[]){
@@ -42,10 +46,10 @@ public class Java8Features {
 //        System.out.println(scoreRepetition);
 
 //      Find the number of vowels present in the subject name
-        Map<String, Integer> result = subject.stream()
-                .collect(Collectors.toMap(Function.identity(), cname -> cname.toLowerCase().replaceAll("[^aeiou]","").length()));
-
-        System.out.println(result);
+//        Map<String, Integer> result = subject.stream()
+//                                  .collect(Collectors.toMap(Function.identity(), cname -> cname.toLowerCase().replaceAll("[^aeiou]","").length()));
+//
+//          System.out.println(result);
 
 //        List<Integer> above90 = marks.stream().filter(p -> p > 90).collect(Collectors.toList());
 //        System.out.println(above90);
@@ -71,9 +75,9 @@ public class Java8Features {
 
 //        int a = arr.stream().findFirst().get();
 //        System.out.println(a);
-
-        Optional<Integer> fany = arr.stream().filter(i-> i%4 ==0).findAny();
-        fany.ifPresent(System.out::println);
+//
+//        Optional<Integer> fany = arr.stream().filter(i-> i%4 ==0).findAny();
+//        fany.ifPresent(System.out::println);
 
         List<Point> aList = new ArrayList<>();
         aList.add(new Point(10, 20));
@@ -105,7 +109,45 @@ public class Java8Features {
 //                .map(word -> new StringBuilder(word).reverse())
 //                .collect(Collectors.joining(" "));
 
-            }
+        List<Person> personList =  new ArrayList<>();
+
+        personList.add(new Person("Subhram",Gender.MALE,26));
+        personList.add(new Person("Subhendu",Gender.MALE,66));
+        personList.add(new Person("Srabani",Gender.FEMALE,56));
+        personList.add(new Person("Moumita",Gender.FEMALE,31));
+        personList.add(new Person("Ram",Gender.MALE,26));
+        personList.add(new Person("Rohit",Gender.MALE,36));
+        personList.add(new Person("Shyam",Gender.MALE,46));
+        personList.add(new Person("Madhumita",Gender.FEMALE,11));
+
+
+//       System.out.println( personList.stream().map(Person::getAge).reduce(0,Integer.sum()); not possible
+
+//         System.out.println( personList.stream().mapToInt(Person::getAge).sum());
+//
+//         List<String> names2 = personList.stream().filter(person -> person.getAge() >30)
+//                 .map(person -> person.getName().toUpperCase())
+//                 .collect(toList());
+//
+         Set<String> malesList = personList.stream()
+                                      .filter(person -> person.getAge() > 30)
+                                      .filter(person ->person.getGender() == Gender.MALE)
+                                      .map(Person::getName)
+                                      .collect(Collectors.toSet());
+
+         System.out.println(malesList);
+
+         Map<String, Person> mapPerson = personList.stream()
+                 .collect(Collectors.toMap(person ->person.getName() + ":" + person.getAge(), Person ->Person));
+
+        System.out.println(mapPerson);
+
+        Map<Boolean,List<Person>> personGrpMap = personList.stream().collect(Collectors.groupingBy(Person -> Person.getGender() == Gender.FEMALE));
+
+        System.out.println(personGrpMap);
+
+    }
+
         }
 
 
