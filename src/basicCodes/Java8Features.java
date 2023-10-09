@@ -146,6 +146,8 @@ public class Java8Features {
 
         System.out.println(personGrpMap);
 
+        System.out.println(personList.stream().max((Person1, Person2)-> Person1.getAge()>Person2.getAge() ? 1:-1));
+
     }
 
         }
