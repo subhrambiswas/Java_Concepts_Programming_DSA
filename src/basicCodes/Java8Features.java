@@ -47,7 +47,8 @@ public class Java8Features {
 
 //      Find the number of vowels present in the subject name
 //        Map<String, Integer> result = subject.stream()
-//                                  .collect(Collectors.toMap(Function.identity(), cname -> cname.toLowerCase().replaceAll("[^aeiou]","").length()));
+//                                  .collect(Collectors.toMap(Function.identity(), cname -> cname.toLowerCase().replaceAll("[^aeiou]","")
+//                                  .length()));
 //
 //          System.out.println(result);
 
@@ -125,9 +126,11 @@ public class Java8Features {
 
 //         System.out.println( personList.stream().mapToInt(Person::getAge).sum());
 //
-//         List<String> names2 = personList.stream().filter(person -> person.getAge() >30)
-//                 .map(person -> person.getName().toUpperCase())
-//                 .collect(toList());
+         List<String> names2 = personList.stream().filter(person -> person.getAge() >30)
+                 .map(person -> person.getName().toUpperCase())
+                 .collect(toList());
+
+         System.out.println( names2);
 //
          Set<String> malesList = personList.stream()
                                       .filter(person -> person.getAge() > 30)
@@ -145,6 +148,13 @@ public class Java8Features {
         Map<Boolean,List<Person>> personGrpMap = personList.stream().collect(Collectors.groupingBy(Person -> Person.getGender() == Gender.FEMALE));
 
         System.out.println(personGrpMap);
+
+        System.out.println(personList.stream().max((Person1, Person2)-> Person1.getAge()>Person2.getAge() ? 1:-1));
+
+        System.out.println(personList.stream().min((Person1, Person2)-> Person1.getAge()>Person2.getAge() ? 1:-1));
+
+
+
 
     }
 
