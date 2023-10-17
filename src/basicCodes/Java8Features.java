@@ -7,8 +7,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.*;
 
 public class Java8Features {
     public static void main(String args[]){
@@ -47,8 +47,7 @@ public class Java8Features {
 
 //      Find the number of vowels present in the subject name
 //        Map<String, Integer> result = subject.stream()
-//                                  .collect(Collectors.toMap(Function.identity(), cname -> cname.toLowerCase().replaceAll("[^aeiou]","")
-//                                  .length()));
+//                                  .collect(Collectors.toMap(Function.identity(), cname -> cname.toLowerCase().replaceAll("[^aeiou]","").length()));
 //
 //          System.out.println(result);
 
@@ -124,14 +123,12 @@ public class Java8Features {
 
 //       System.out.println( personList.stream().map(Person::getAge).reduce(0,Integer.sum()); not possible
 
-//         System.out.println( personList.stream().mapToInt(Person::getAge).sum());
-//
+         System.out.println( personList.stream().mapToInt(Person::getAge).sum());
+
          List<String> names2 = personList.stream().filter(person -> person.getAge() >30)
                  .map(person -> person.getName().toUpperCase())
                  .collect(toList());
 
-         System.out.println( names2);
-//
          Set<String> malesList = personList.stream()
                                       .filter(person -> person.getAge() > 30)
                                       .filter(person ->person.getGender() == Gender.MALE)
@@ -155,6 +152,17 @@ public class Java8Features {
 
 
 
+
+        String str = "abcdABCDabcd";
+        Map<Character, Integer> frequency =
+                str.chars()
+                        .mapToObj(c -> (char)c)
+                        .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(c -> 1)));
+        System.out.println(frequency);
+
+        List<Integer> list1 = Arrays.asList(1,2,3,3,4,4,4,5);
+
+        System.out.println(list1.stream().collect(Collectors.groupingBy(Function.identity(), counting())));
 
     }
 

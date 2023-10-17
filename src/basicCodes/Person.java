@@ -4,6 +4,8 @@ public class Person {
     String name;
     int age;
 
+    Gender gender;
+
     @Override
     public String toString() {
         return "Person{" +
@@ -12,8 +14,6 @@ public class Person {
                 ", gender=" + gender +
                 '}';
     }
-
-    Gender gender;
 
     public Person(String name, Gender gender, int i) {
          this.name=name;
